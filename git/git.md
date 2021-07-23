@@ -1,6 +1,8 @@
-# command
+# git
 
-> git 기본 명령어 정리
+> 버전 관리 시스템
+
+
 
 ### 생성
 
@@ -31,7 +33,7 @@ git status
 
 ##### log
 
-- 커밋의 히스토리를 보여주는 명령어
+- 커밋의 히스토리를 보여주는 명령어 (git log --online)
 
 ```bash
 git log
@@ -111,9 +113,7 @@ git push origin master
 
 ### 첫 시작
 
-
-
-1. init
+1. 초기화 : 폴더를 repository(로컬저장소)로 바꿔준다.
 
 ```bash
 git init
@@ -134,7 +134,7 @@ $ git commint -m "First"
 4. 원격저장소와 연결
 
 ```bash
-$ git branch -M main
+#$ git branch -M main
 $ git remote add origin https://github.com/noeun0/TIL.git
 ```
 
@@ -142,6 +142,16 @@ $ git remote add origin https://github.com/noeun0/TIL.git
 
 ```bash
 git push -u origin main
+```
+
+
+
+# clone 하기
+
+해당 페이지에서 주소 복사 -> 
+
+```
+git clone
 ```
 
 
