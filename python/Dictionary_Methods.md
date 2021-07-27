@@ -5,7 +5,7 @@
 Removes all elements from the dictionary
 
 ```
-Clear()
+.Clear()
 ```
 
 
@@ -13,7 +13,7 @@ Clear()
 Returns a copy of the dictionary
 
 ```
-Copy()
+.Copy()
 ```
 
 
@@ -21,7 +21,7 @@ Copy()
 Returns a dictionary with the specified keys and value
 
 ```python
-fromkeys()
+.fromkeys()
 
 dict.fromkeys(list_key,['a'])
 # list_key에 있는 값들을 키값으로 하고, 모든 value값을 a로 하는 딕셔너리를 만들어준다
@@ -53,7 +53,7 @@ print(car)
 Returns the value of the specified key
 
 ```
-get()
+.get()
 ```
 
 
@@ -61,7 +61,7 @@ get()
 Returns a list containing a tuple for each key value pair
 
 ```
-items()
+.items()
 ```
 
 
@@ -69,7 +69,7 @@ items()
 Returns a list containing the dictionary's keys
 
 ```
-keys()
+.keys()
 ```
 
 
@@ -77,7 +77,7 @@ keys()
 Removes the element with the specified key
 
 ```
-pop()
+.pop()
 ```
 
 
@@ -85,7 +85,7 @@ pop()
 Removes the last inserted key-value pair
 
 ```python
-popitem() # 맨 나중에 추가된 값 삭제!!
+.popitem() # 맨 나중에 추가된 값 삭제!!
 ```
 
 
@@ -95,7 +95,7 @@ Returns the value of the specified key. If the key does exist: insert the key, w
 - 딕셔너리 자료형에 없는 키로 접근하면 오류가 발생된다. 이런 keyError를 발생시키지 않고 단순히 키를 조회하는 경우라면 get 메소드를 사용하면 없는 키의 반환은 None이거나 default가 된다. 또한 필요에 따라 단순히 조회뿐만 아니라 없는 키의 경우, 값을 부여해 줄 수 있는 setdefault함수가 존재한다.
 
 ```python
-setdefault(a,defalult)
+.setdefault(a,defalult)
 #setdefault()메소드는 키 a가 딕셔너리에 있으면 dict[a]값을 반환하고
 #아니면 dict[a]=default를 설정한 후 default를 다시 반환한다.
 
@@ -108,7 +108,7 @@ Updates the dictionary with the specified key-value pairs
 - 딕셔너리 형태의 파일을 더해줄때 사용된다.
 
 ```
-update()
+.update()
 ```
 
 
@@ -116,7 +116,7 @@ update()
 Returns a list of all the values in the dictionary
 
 ```
-values()
+.values()
 ```
 
 
