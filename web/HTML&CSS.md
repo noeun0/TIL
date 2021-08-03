@@ -92,10 +92,98 @@ form
 `<a>` 
 
 - 링크라는 것을 알려주는 태그
-
 - 속성 href 를 사용해서 주소를 알려주어야 한다.
 - target="_blank" 를 입력하면 새로운 창에서 이동하게 함
 - title="내용"을 입력하면 마우스를 롤오버 했을때 내용이 미리 보이게 함
+
+`<img>`
+
+- 이미지 첨부하는 테그
+- `alt`  이미지 로드를 실패했을때 나오는 텍스트,
+- `scr`로 상대경로/절대경로 나타내줌 ( 필수 )
+
+
+
+`<form>`
+
+- 입력받을 형식을 만듦
+
+  
+
+`<div>`
+
+- 일정 영역으로 묶어줌
+
+- 스타일 만들때 스타일을 묶어주기도(?)
+
+  
+
+`<label>`
+
+- `for`  뭐를 위한 라벨인지 . 클릭했을때 커서가 어디로 가는지
+  - input의 id 값을 넣어줌
+
+`<input>`
+
+- `name` 입력받을 값을 전달할 변수 이름
+
+  - name="name" -> url 뒤에 name=노은영 식으로 붙혀서 전송
+
+- `type` 입력받을 값의 형태
+
+  - `submit` : 전송
+
+  - `text` : 텍스트 입력
+
+  - `number` : 숫자 입력
+
+  - `radio` :  라디오 버튼
+
+    ```html
+    # 한 질문에 해당하는 것들은 name을 통일해야함
+    # 전달될 값은 value
+    <input type = 'radio' id="temp1" name = 'temp' value="under">
+    <label for "temp1"> 37도 미만 </label>
+    <input type = 'radio' id="temp2" name = 'temp' value="over">
+    <label for "temp2"> 37도 이상 </label>
+    ```
+
+- `id` : label과 연결해줌
+
+- `placeholder` : 입력받기 전에 보여줄 텍스트
+
+  
+
+`<select>`  선택박스로 입력받음
+
+- `option` 
+  - `value` 값에 전달할 값을 넣어주어야 함
+
+
+
+
+
+div#ssafy : #은 id 선택자
+
+div.ssafy : class .은 클래스 선택자
+
+
+
+`p:nth-of-type`
+
+: n번째 p를 찾아 속성을 적용해준다.
+
+
+
+`p:nth=child`
+
+:모든 자식중 n번째 값에 속성을 적용해준다.
+
+
+
+style은 보통 헤더에 넣는다.
+
+
 
 ---
 
@@ -166,4 +254,10 @@ CSS 구문
 > 반대는 x
 
 
+
+---
+
+
+
+클래스 선택자 > div선택자
 
