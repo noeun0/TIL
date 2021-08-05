@@ -101,7 +101,7 @@
     - grid layout에서 내용은 반드시 columns안에 있어야 한다. 오직 columns만 row의 바로 하위 자식 일 수 있다.
   - gutter : 간격을 위한 여백을 주는 것 
     			- column사이의 padding
-    			- grid 시스템에서 반응적으로 공간을 확보하고 컨텐츠를 정렬하는데 사용
+      			- grid 시스템에서 반응적으로 공간을 확보하고 컨텐츠를 정렬하는데 사용
 
 - 12개의 column, 6개의 grid breakpoints로 구성
 
@@ -142,3 +142,29 @@ ex)
 ### nesting
 
 -추가 예쩡
+
+
+
+
+
+---
+
+### 예제 풀이
+
+
+
+버튼 만들기
+
+![image-20210805112314326](../../../../AppData/Roaming/Typora/typora-user-images/image-20210805112314326.png)
+
+- 가로 크기를 길게 하기 위해 `d-grid`를 사용했고 `col-8`을 줬다.
+- gap-2의 역할이 뭘까?
+- `mx-auto`를 사용해서 가운데 정렬했다.
+- `class="btn btn-success"`로 초록색으로 설정했다.
+
+```html
+<div class='d-grid gap-2 col-8 mx-auto'>
+  <button type="button" class="btn btn-success">Sign in</button>
+</div>
+```
+
