@@ -89,3 +89,9 @@ https://flexboxfroggy.com/#ko
 : wrap : 요소들을 여러 줄에 정렬
 
 : wrap-reverse : 요소들을 여러 줄에 걸쳐 반대로 정렬
+
+
+
+non 속성 
+
+display non
