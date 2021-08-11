@@ -105,7 +105,14 @@ git push origin master
 
 
 
+```bash
+error: You have not concluded your merge (MERGE_HEAD exists).
+hint: Please, commit your changes before merging.
+fatal: Exiting because of unfinished merge.
 
+```
+
+-> git add . 후 commit하자
 
 ---
 
