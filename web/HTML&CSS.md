@@ -84,7 +84,7 @@
 
 - `<b>` vs `<string>` : 굵게 / 강조 
 
-- `<i>` vs `<em>` 
+- `<i>` vs `<em>` : i는 어떤 이유에서 주위와 구분해야 하는 경우. em은 강세를 나타냄 /둘다 기울임꼴 표시
 - `<span>`, `<br>`, `<img>` 
 - 등등
 
@@ -180,7 +180,13 @@
 
 - `placeholder=` : 입력받기 전에 보여줄 텍스트
 
-- ```html
+- `pattern=` : 데이터 검증
+
+- `required= ` : 필수 입력사항 인지
+
+- `autofocus=` : 페이지가 열릴때 포커스가 이동하게
+
+  ```html
   # 한 질문에 해당하는 것들은 name을 통일해야함
   # 전달될 값은 value
   <input type = 'radio' id="temp1" name = 'temp' value="under">
@@ -274,22 +280,6 @@ div.ssafy : class .은 클래스 선택자
 
 
 
-`p:nth-of-type`
-
-: n번째 p를 찾아 속성을 적용해준다.
-
-
-
-`p:nth=child`
-
-:모든 자식중 n번째 값에 속성을 적용해준다.
-
-
-
-style은 보통 헤더에 넣는다.
-
-
-
 ---
 
 # 2. CSS
@@ -305,13 +295,11 @@ style은 보통 헤더에 넣는다.
 
 - 정의 방법
 
-  - 인라인 : 테그 안에서 작성한다
-  - 내부참조 : 태그 내 `<style>`태그에 작성
+  - 인라인 : 태그 안에서 작성한다
+  - 내부참조 : head 태그 내 `<style>`태그에 작성
   - 외부참조 : 외부 css파일을 `<head>`내 `<link>`통해 불러오기
 
    
-
-CSS 구문
 
 **선택자** 
 
@@ -322,17 +310,96 @@ CSS 구문
   - 전체 선택자, 요소 선택자
   - 클래스 선택자, 아이디 선택자, 속성 선택자
 
-- 결합자
+**결합자**
 
-  - 자손 결합자, 자식 결합자
-  - 일반 형제 결합자, 인접 형제 결합자
+- 자손 결합자 : selector A 하위의 모든 selectorB 요소
+
+  ```
+  div span
+  ```
+
+- 자식 결합자 : selector A 바로 아래의 selectorB 요소
+
+  ```
+  div > span
+  ```
+
+- 일반 형제 결합자 : selectorA의 형제 요소 중 뒤에 위치하는 selectorB요소를 모두 선택
+
+  ```
+  p ~ span
+  ```
+
+- 인접 형제 결합자 : selectorA의 형제 요소중 바로 뒤에 위치하는 selectorB요소를 선택
+
+  ```
+  p + span
+  ```
 
 - 의사 클래스 / 요소
 
   - 링크  동적 의사 클래스
   - 구조적 의사 클래스
 
-  
+
+**css 적용 우선순위**
+
+1. 중요도
+
+- important
+
+2. 우선 순위
+
+- 인라인 > id 선택자 > class 선택자 > 요소 선택자
+
+3. 소스 순서
+
+**css 상속**
+
+- css는 상속을 통해 부모 요소의 속성을 자식에게 상속
+- 속성 중에는 상속이 되는것과 되지 않는 것이 있다.
+- 상속되는 것
+  - text 관련 요소 (font, color, text-align), opacity, visibility
+- 상속 되지 않는 것
+  - box model 관련 요소 (width, height, margin, padding, border, box-sizing, display),
+  - position 관련 요소(position, top/right/bottom/left)
+
+
+
+html 요소 구성 : box 형태로 되어있다!
+
+- content : 글이나 이미지 등 요소 실제 내용
+
+- padding : 테두리 안쪽의 내부 여백 배경색, 이미지 적용 가능
+
+- border : 테두리
+
+- margin : 테두리 바깥의 외부 여백 배경색 지정 못함
+
+  값의 갯수에 따라 나타내는 바가 달라짐
+
+  - 1개 : 상하좌우
+  - 2개 : 상하 / 좌우
+  - 3개 : 상/ 좌우 / 하
+  - 4개 : 상 / 우 / 하 / 좌
+
+  마진 상쇄 : block A의 top 과 block B의 bottom 에 적용된 각각의 margin이 둘 중에서 큰 마진 값으로 결합되는 현상
+
+`p:nth-of-type`
+
+: n번째 p를 찾아 속성을 적용해준다.
+
+
+
+`p:nth-child`
+
+:모든 자식중 n번째 값에 속성을 적용해준다.
+
+
+
+style은 보통 헤더에 넣는다.
+
+
 
 ---
 
@@ -341,6 +408,7 @@ CSS 구문
 ### block
 
 - 한줄 전체를 사용 마진을 전부 차지
+- 블록 레벨 요소 안에 인라인 레벨 요소가 들어갈 수 있다.
 - div, p, hr, h, ul, ol, li, form  등
 
 ### inline
@@ -350,6 +418,25 @@ CSS 구문
 - 위아래 마진을 line height를 사용해서 지정해줄 순 있음
 - input, span, a, img, label, b, em, i, strong( 하나의 단어만 수정하는.. ) 등..
 
+### inline-block
+
+- block 과 inline 레벨 요소의 특징을 모두 갖는다.
+- inline처럼 한줄에 표시 가능하며
+- block처럼 width, height, margin 속성을 모두 지정할 수 있다.
+
+### none
+
+class 생성자 형태로 아래와 같이 값을 줄 수 있다!
+
+```html
+.none{
+	display : none ;
+}
+```
+
+- 해당 요소를 화면에 표시하지 않는다.
+- visibility : hidden은 공간은 차지하나 화면에만 안보임
+
 
 
 서로의 형태로 `style="display:inline"`형태로 변경 가능 하다.
@@ -357,6 +444,22 @@ CSS 구문
 > 큰 부분안에 작은 부분을 넣는건 o ( block 안에 inline)
 >
 > 반대는 x
+
+
+
+---
+
+# CSS position
+
+- relative : 상대 위치
+  - 자기 자신의 static 위치를 기준으로 이동
+  - 레이아웃에서 요소가 차지하는 공간은 static 일때와 같다.
+- absolure : 절대 위치
+  - 요소를 일반적인 문서 흐름에서 제거 후 레이아웃에 공간을 차지하지 않는다.
+  - 가장 가까히 있는 부모, 조상 요소를 기준으로 이동
+  - 원래 위치에 있던 과거 위치 공간은 더이상 존재하지 않는다. 즉 아래 것들이 위로 올라오게됨!
+
+
 
 
 

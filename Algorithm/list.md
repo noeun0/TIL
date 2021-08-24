@@ -139,8 +139,6 @@ for minindex in range(0,k):
 
 
 
-
-
 ### 달팽이 순환
 
 ```python
