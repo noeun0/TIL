@@ -294,7 +294,7 @@ Revoke privileges on t from user
 
 ### TCL
 
-트렌젝션
+##### 트렌젝션
 
 - 데이터베이스의 작업을 처리하는 논리적 연산 단위, 분리할 수 없는 한개 이상의 데이터 조직
 
@@ -320,13 +320,11 @@ save transaction
 	commit or rollback or rollack to 별칭
 ```
 
-
-
-Decode
+##### Decode
 
 - decode(c,p,v1,v2)
 
-Case
+##### Case
 
 ```sql
 searched_case_exprssion:
@@ -344,7 +342,7 @@ end as 별칭 from t
 
 
 
-ROWID
+### ROWID
 
 - 실제 데이터를 보관하는 테이블 블록의 주소
 
@@ -352,8 +350,31 @@ ROWID
 2) 조회를 원하는 블록을 바로 참조 가능
 3) 오브젝트 / 상대파일 / 블록 / 데이터 번호로 구성
 
-WITH
+### WITH
 
-ROLE
+- 임시 테이블 만듦
+
+- with 절은 동일한 sql이 반복되어서 사용될 때 성능을 높히기 위해 사용한다
+
+- table을 만들지 않고도 table 만든 것과 같은 효과를 내는데 실제로 temp라는 임시테이블에 저장되는 것이다
+
+- 비슷한 기능을 하는 뷰는 쿼리 결과문을 테이블로 저장하는게 아니라 그냥 별칭만 해주는 것이다. 
+
+- 이에반해 with은 가상의 테이블이다. 메모리를 차지한다
+
+- 종류는 materialize, inline이 있다.
+
+  1) materialize
+     - 기본 with절 사용 시 적용되는 것. 실행시간이 단축된다.
+  2) inline
+     - inline은 temp 테이블도 생성하지 않고 in line view로 수행하는 것이다.
+
+  WITH RECURSIVE 문(재귀 쿼리)
+
+  - 메모리 상의 가상테이블을 저장
+  - 반드시 union 사용
+  - 정지 조건 요구
+
+#### ROLE
 
 - aksgdms dbms사용자에게 개별적으로 많은 권한을 부여하는 번거로움과 어려움을 해소하기 위해 다영한 궈한을 하나의 ㄱ그룹으로 묶은 논리적 권한의 그룹
