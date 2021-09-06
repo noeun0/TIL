@@ -41,6 +41,16 @@ django-admin startproject <name> .
 
 
 
+협업을 위한 개발 환경 문서 만들기
+
+```
+pip freeze > requirements.txt
+```
+
+
+
+
+
 # App 생성하기
 
 
@@ -89,7 +99,14 @@ INSTALLED_APPS = [
 
 6. http://127.0.0.1:8000/<app명>/hello1
 
-   
+
+
+
+
+
+
+
+
 
 url 설정하기
 
@@ -203,25 +220,133 @@ python manage.py 명령어
 
 
 
-# Model 생성 절차
+### Model 생성
 
-- 장고 모델을 먼저 만들고 데이터베이스에 적용
-  1.  models.py에 model 클래스 작성
-  2. admin.py에 등록(admin app에서 관리할 경우)
-     - admin.site.register(모델 클래스)
-  3. 마이그레이션(migration)파일 생성 - (makemigrations 명령)
-     - 변경 사항 db에 넣기 위한 내역을 가진 파일로 app/migrations 디렉토리에 생성된다.
-     - python manage.py makemigrations
-     - sql문 확인
-       - python manage.py sqlmigrate app이름 마이그레이션파일명
-  4. Database에 적용(migrate 명령)
-     - python manage.py migration
+> 모델을 생성하고 변경할때마다 마이그레이션을 생성하고 적용해주자!
 
-- DB에 테이블이 있을 경우 다음을 이용해 장고 Model 클래스들을 생성할 수 있다.
+##### 장고 모델을 먼저 만들고 데이터베이스에 적용
+
+app/models.py에 model 클래스 작성
+
+```python
+class Question(models.Model):
+    title = models.CharField(max_length = 100)
+    content = models.TextField()
+    category = models.CharField(max_length = 100)
+    created_at = models.DateTimeField(auto_now_add = True)
+    update_at = models.DateTimeField(auto_now = True)
+
+```
+
+마이그레이션 파일 생성 
+
+```
+python manage.py makemigrations
+```
+
+db에 적용하기
+
+```
+python manage.py migration
+```
 
 
+
+##### admin페이지 설정하기
+
+**admin.py**에 등록(admin app에서 관리할 경우)
+
+```python
+from .models import Question
+admin.site.register(Question) #모델클래스
+```
+
+admin 계정 생성
+
+```bash
+$ python manage.py createsuperuser
+```
+
+admin에 보여줄 제목 설정 / **models.py**
+
+```python
+def __str__(self):
+	return self.title
+```
+
+
+
+sql문 확인
+
+```bash
+$ python manage.py sqlmigrate app이름 마이그레이션파일명
+```
 
 
 
 ---
+
+### URL 생성
+
+> 요청을 받아서 views의 어떤 함수를 실행시킬지
+
+메인 프로젝트 폴더 안의 **urls.py**에 추가
+
+```
+path('board/', include('board.urls')),
+```
+
+app 폴더 안의 **urls.py**를 생성 후 url 리스트 추가
+
+- path : 요청을 받아서 함수로 연결시켜준다.
+- urlpatterns안에 나열하자
+- `path('new/', views.new)` 형식으로 아직 함수를 구현하진 않았지만 계획!한다
+- 고정 값을 갖는 url을 앞부분에 배치해줘야 하고 그 후에 변수값을 갖는 url을 배치
+
+```
+from django.urls import path
+
+
+urlpatterns = [
+    # path : 요청을 받아서 함수로 연결해줌
+    # c
+    path('new/', views.new),
+    path('create/', views.create),
+    #r
+    path('', views.index),
+    path('<int:pk>/', views.detail),
+    #u
+    path('<int:pk>/edit', views.edit),
+    path('<int:pk>/update', views.update),
+    #d
+    path('<int:pk>/delete', views.delete)
+
+]
+```
+
+
+
+### Views의 함수 생성
+
+> urls의 함수명을 토대로 함수를 작성
+
+- 변수를 함께 요청받는 함수들은 매개변수에 해당 변수 추가하기
+- html 문서로 보내야 하는 경우 아래와 같은 형식으로 return
+
+```python
+return render(request, 'html경로')
+```
+
+- db를 사용해야 한다면  models에 있는 Question를 objects.all() 메소드를 사용하여 변수에 값을 담고, 이를 딕셔너리로 형변환 하여 함께 return
+
+```python
+from .models import Question  
+    context = {
+        questions = Question.objects.all()
+        'question':questions,
+    }
+    return render(request, 'board/index.html',context)
+```
+
+
 
