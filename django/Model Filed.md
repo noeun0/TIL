@@ -1,8 +1,10 @@
+### 이미지 파일 업로드 하기
+
 맨 상위 폴더 아래
 
 static/images 폴더 생성해서 이미지 넣고
 
-settings에 
+*settings.py*
 
 ```python
 STATIC_URL = '/static/'
@@ -14,9 +16,7 @@ STATICFILES_DIRS = [BASE_DIR/'static']
 
 
 
-
-
-사용하고 싶은 html 파일 
+*사용하고 싶은 html 파일* 
 
 ```
 {% load static %}
@@ -24,36 +24,38 @@ STATICFILES_DIRS = [BASE_DIR/'static']
 
 
 
-##### 미디어 경로 변수화 하기
+### 미디어 경로 설정, 변수화 하기
 
-ulrs.py
+*settings.py*
+
+```python
+MEDIA_URL = '/media/' # 경로의 이름 / url을 어떻게 구성할지?
+MEDIA_ROOT = BASE_DIR / 'media' #실제 파일이 저장되는 공간
+```
+
+*ulrs.py*
 
 - settings.py 를 불러와서 static()에 변수화 하기.
+
+- `from django.conf.urls.static import static`
+
+  `from django.conf import settings`
 
 ```python
 urlpatterns = [
    ....
    
-] + static (settings.MEDIA_URL, documents_root=settings.MEDIA_ROOT) 
+] + static (settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
 ```
 
 
 
+*사용할 html*
 
+```
+{{ article.image.url }}
 
-
-
-실행 순서
-
-장고는 http 요청이 들어왔기 떄문에
-
-urls가 반응한다. 인덱스 함수를 실행
-
-아티클을 가지고 콘텍스트에 담아서 인덱스html을 크롬 브라우저에게 전달
-
-크롬은 사용자에게 보여줄 수 있도록 렌더링 하는 중에
-
-static 경로의 이미지를 찾기 위해 장고에게 요청, 그럼 장고는 이미지를 찾아서 보내고 크롬은 그 페이지를 조립해서 보여준다.
+```
 
 
 
@@ -70,7 +72,7 @@ static 경로의 이미지를 찾기 위해 장고에게 요청, 그럼 장고�
   - 이미지 업로드에서 사용하는 모델 필드
 
 ```python
-img = models.ImageField()
+image = models.ImageField(upload_to='images/')
 ```
 
 
@@ -110,3 +112,12 @@ form = ArticleForm(request.POST, request.FILES)
 
 
 
+#### 실행 순서
+
+장고는 http 요청이 들어왔기 떄문에 우선 urls가 반응한다. 인덱스 함수를 실행
+
+아티클을 가지고 콘텍스트에 담아서 인덱스html을 크롬 브라우저에게 전달
+
+크롬은 사용자에게 보여줄 수 있도록 렌더링 하는 중에
+
+static 경로의 이미지를 찾기 위해 장고에게 요청, 그럼 장고는 이미지를 찾아서 보내고 크롬은 그 페이지를 조립해서 보여준다.
