@@ -243,45 +243,28 @@ ORDER BY age DESC LIMIT 10;
 
 ```shell
 #orm
-User.objects.order_by('balance')[:10]
-
+User.objects.aggregate(avg_age=Avg('age'))
+User.objects.aggregate(Avg('age'))
 ```
 
 ```sql
 --sql
-SELECT * FROM users_user
-ORDER BY balance ASC LIMIT 10;
+SELECT AVG(age) FROM users_user
+WHERE last_name='김'
 ```
 
 
 
-잔액이 적은 10명 가져오기
+강원도 사는 사람의 잔액 평균
 
 ```shell
 #orm
-
-User.objects.order_by('balance','-age') [0:10]
+User.objects.filter(country='강원도').aggregate(Avg('balance'))
 ```
 
 ```sql
 --sql
-SELECT * FROM users_user
-ORDER BY balance ASC, age DESC LIMIT 10;
-```
-
-
-
-잔액이 적은 10명 가져오기
-
-```shell
-#orm
-User.objects.order_by('-last_name','-first_name')[:10][4]
-```
-
-```sql
---sql
-SELECT * FROM users_user
-ORDER BY last_name DESC, first_name DESC
-LIMIT 1 OFFSET 4;
+SELECT AVG(balance) FROM users_user
+WHERE country='강원도';
 ```
 
