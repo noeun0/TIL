@@ -303,7 +303,7 @@ app 폴더 안의 **urls.py**를 생성 후 url 리스트 추가
 - `path('new/', views.new)` 형식으로 아직 함수를 구현하진 않았지만 계획!한다
 - 고정 값을 갖는 url을 앞부분에 배치해줘야 하고 그 후에 변수값을 갖는 url을 배치
 
-```
+```python
 from django.urls import path
 
 
