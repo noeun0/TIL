@@ -38,7 +38,7 @@ def create,update(request,(pk)):
     
 @require_POST
 def delete(request,pk)
-
+   
 @require_safe
 def index, detail(request,pk)
 

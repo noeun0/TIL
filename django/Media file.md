@@ -212,7 +212,26 @@ def update(request,pk):
 
 ```
 
+---
 
+
+
+### 이미지 리싸이즈
+
+1. django-imagekit 설치
+
+2. INSTALLED_APPS에 추가
+
+models.py
+
+```python
+image = ProcessedImageField(
+	upload_to = 'thumbnails/',
+	processors = [ResizeToFill(100,50)],
+	format = 'JPEG',
+	options={'quality' : 60 }
+	)
+```
 
 
 
